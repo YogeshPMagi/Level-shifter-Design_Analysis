@@ -1,9 +1,9 @@
-# CMOS-Inverter-Design-and-Analysis-using-Sky130pdk
- This repository documents the characterization and analysis of nMOS and pMOS devices as well as design and analysis of a CMOS inverter using various open source tools like Xschem, Ngspice, MAGIC, Netgen etc.
+# Level Shifter Design and Analysis-using-Sky130pdk
+ This repository documents the characterization and analysis of nMOS and pMOS devices as well as design and analysis of a CMOS Level Shifter Design and Analysis using various open source tools like Xschem, Ngspice, MAGIC, Netgen etc.
  ### Analysis of nMOS and pMOS
  Here we have used the 1.8V standard model of nMOS and pMOS in the SkyWater 130nm open-source Process Design Kit (PDK) for the analyis to determine parameters like threshold voltage, transconductance, and output resistance. The extracted parameters provide insight into device operation, including switching behavior and drive strength, and form the basis for selecting appropriate transistor dimensions in the CMOS inverter design.
- ### Design and Analysis of CMOS Inverter
- After the nMOS and pMOS analysis, we start to design the CMOS inverter using nMOS and pMOS devices characterized in the previous stage. The inverter is analyzed under both DC and transient conditions to study its voltage transfer behavior, noise immunity, delay characteristics, and power dissipation. The the impact of transistor sizing and load capacitance on inverter performance is examined to establish design trade-offs relevant to CMOS digital circuits.
+ ### Design and Analysis of Level Shifter
+ Following the characterization of individual nMOS and pMOS devices, I have designed a Level Shifter circuit. This circuit is essential in multi-voltage domain designs to shift a logic signal from a low-voltage rail (VDDL) to a high-voltage rail (VDDH) without causing static power leakage or logic failure. The design is analyzed under transient conditions to study its switching behavior, propagation delay, and power dissipation using the SkyWater 130nm PDK.
 
 ---
 
@@ -32,25 +32,25 @@
 ### 1.1 Xschem
 ![image](https://user-images.githubusercontent.com/43693407/143311382-8cd3c1c9-dd07-4179-892d-52e9cf71e5a7.png)
 
-[Xschem](http://repo.hu/projects/xschem/xschem_man/xschem_man.html) is a schematic capture program that allows to interactively enter an electronic circuit using a graphical and easy to use interface. When the schematic has been created a circuit netlist can be generated for simulation. is an open-source schematic capture tool widely used in analog and digital integrated circuit design workflows. In this project, Xschem is employed to create transistor-level schematics of NMOS, PMOS, and CMOS inverter circuits using the SKY130 PDK device symbols. It provides a flexible environment for hierarchical schematic design and seamless integration with circuit simulators such as Ngspice. Xschem enables accurate netlisting of schematics, which is essential for performing DC, transient, and parametric simulations. Its support for technology-specific symbol libraries makes it suitable for CMOS design and analysis using open-source process design kits.
+[Xschem](http://repo.hu/projects/xschem/xschem_man/xschem_man.html) is a schematic capture program that allows to interactively enter an electronic circuit using a graphical and easy to use interface. When the schematic has been created a circuit netlist can be generated for simulation. is an open-source schematic capture tool widely used in analog and digital integrated circuit design workflows. 
  > [xschem manual](https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html)
 
 ### 1.2 Ngspice
 ![image](https://user-images.githubusercontent.com/49194847/138070431-d95ce371-db3b-43a1-8dbe-fa85bff53625.png)
 
-[Ngspice](http://ngspice.sourceforge.net/devel.html) is an open-source SPICE-based circuit simulation tool used for the analysis of analog and digital electronic circuits. In this project, Ngspice is utilized to perform DC, transient, and parametric simulations of NMOS, PMOS, and CMOS inverter circuits designed using the SKY130 PDK. It enables the evaluation of current–voltage characteristics, voltage transfer behavior, timing parameters, and power consumption. Ngspice supports device-level modeling and script-based simulation control, making it well suited for extracting MOSFET parameters and analyzing inverter performance under varying operating conditions.
+[Ngspice](http://ngspice.sourceforge.net/devel.html) is an open-source SPICE-based circuit simulation tool used for the analysis of analog and digital electronic circuits. In this project, Ngspice is utilized to perform DC, transient, and parametric simulations of NMOS, PMOS circuits designed using the SKY130 PDK. It enables the evaluation of current–voltage characteristics, voltage transfer behavior, timing parameters, and power consumption. Ngspice supports device-level modeling and script-based simulation control, making it well suited for extracting MOSFET parameters and analyzing inverter performance under varying operating conditions.
  > [ngspice manual](https://ngspice.sourceforge.io/docs.html)
 
 ### 1.3 Magic
 ![image](https://user-images.githubusercontent.com/49194847/138071384-a2c83ba4-3f9c-431a-98da-72dc2bba38e7.png)
 
-[Magic](http://opencircuitdesign.com/magic/) is an open-source layout editor used for physical design of integrated circuits. In this project, Magic is employed to create the physical layout of the CMOS inverter using design rules provided by the SKY130 PDK. It supports design rule checking (DRC) to ensure layout correctness and allows extraction of parasitic components from the layout. The extracted layout information is used for post-layout simulation, enabling evaluation of the impact of parasitic capacitances and resistances on inverter performance. Magic plays a key role in bridging schematic-level design and physical implementation in the CMOS design flow.
+[Magic](http://opencircuitdesign.com/magic/) is an open-source layout editor used for physical design of integrated circuits. In this project, Magic is employed to create the physical layout of the CMOS Design and Analysis of Level Shifter using design rules provided by the SKY130 PDK. It supports design rule checking (DRC) to ensure layout correctness and allows extraction of parasitic components from the layout. The extracted layout information is used for post-layout simulation, enabling evaluation of the impact of parasitic capacitances and resistances on inverter performance. Magic plays a key role in bridging schematic-level design and physical implementation in the CMOS design flow.
  > [magic manual](http://opencircuitdesign.com/magic/magic_docs.html)
 
 ### 1.4 Netgen
 ![image](https://github.com/SudeepGopavaram/Design_and_analysis_of_nmos_and_pmos_using_sky130pdk/assets/57873021/215efd81-b834-4845-a390-d8c8be694ed2)
 
-[Netgen](http://opencircuitdesign.com/netgen/) is an open-source verification tool used for layout versus schematic (LVS) checking in integrated circuit design flows. In this project, Netgen is used to compare the netlist extracted from the physical layout with the netlist generated from the schematic to ensure logical equivalence between the two representations. This verification step confirms that the implemented layout correctly reflects the intended circuit design. Netgen thereby ensures design correctness before post-layout simulation and helps identify connectivity or device mismatch issues in the CMOS inverter layout.
+[Netgen](http://opencircuitdesign.com/netgen/) is an open-source verification tool used for layout versus schematic (LVS) checking in integrated circuit design flows. In this project, Netgen is used to compare the netlist extracted from the physical layout with the netlist generated from the schematic to ensure logical equivalence between the two representations. This verification step confirms that the implemented layout correctly reflects the intended circuit design. Netgen thereby ensures design correctness before post-layout simulation and helps identify connectivity or device mismatch issues in the CMOS Design and Analysis of Level Shifter layout.
  > [magic manual](http://opencircuitdesign.com/netgen/tutorial/tutorial.html)
 
 ### 1.5 SkyWater Technology
@@ -72,29 +72,7 @@ The components used are as follows:
 6. ```pfet_g5v0d10v5.sym``` (xschem device library)
 7. ```nfet_g5v0d10v5.sym``` (xschem device library)
 
-I generated the netlist using Xschem and then do DC analysis usng Ngspice to plot basic characteristic plots for nMOS and pMOS transistors, i.e. **Ids vs Vds** and **Ids vs Vgs**.
-![nMOS schematic](.\Images\nfet_01v8..png)<br>
-When I sweep Vgs (gate-to-source voltage) for different values of Vds (drain-to-source voltage) in DC analysis, the plot below are obtained:
-![Id vs Vgs](.\Images\NMOS id vs.png)<br>
-The above plot is for **Id vs Vgs** and we can see that the threshold voltage for the nMOS lies between 0.6V and 0.7V
 
-When I sweep Vds (drain-to-source voltage) for different values of Vgs (gate-to-source voltage) in DC analysis, the plot below are obtained:
-![Id vs Vds](.Images\NMOS id vs Vds.png)<br>
-The above plot is for **Id vs Vds** and we can see the linear and saturation region of the curve of nMOS.
-
-
-For designing an inverter, I have choose the highest value available for Vds which will be 1.8V and find values of drain current (Id), transconductance (gm), and output resistance (rds) at Vgs = 1.8V and Vds = 1.8V:
-From the above plots and simulations, we get:
-1. Id = 0.5009414 mA at Vgs = 1.8V
-2. gm = 0.5320934 mS at Vgs = 1.8V
-3. Id = 0.5009414 mA at Vds = 1.8V
-4. rds = 19.30674KΩ at Vds = 1.8V
-We have found all the important values we needed for nMOS and we can do the same for pMOS. The main objective is to decide the aspect ratio to achieve a symmetric CMOS inverter with equal driving strengths. After doing some experiments, I have obtained that at Wp = 3.5 Wn, keeping the L same at 0.15μm. So, After performing same simulations for pMOS at W = 3.5:
-From the above plots and simulations, we get:
-1. Id = 0.711175 mA at Vgs = 1.8V
-2. gm = 0.8593639 mS at Vgs = 1.8V
-3. Id = 0.711175 mA at Vds = 1.8V
-4. rds = 6.510506KΩ at Vds = 1.8V
 ### 2.2 Strong 0 and Weak 1
 ![nMOS inverter](.\Images\NMOS_INV (2).png)<br><br>
 ![nMOS inverter Transient](.\Images\Nmos inv Wave.png)<br>
@@ -108,10 +86,10 @@ The pMOS here passes a strong 1 but only a weak 0 because of the same reason whi
 ### 3.1 Why Level Shifter  Circuits
 A Level Shifter is a crucial bridge in multi-voltage domain designs. It allows a signal from a low-voltage domain (VDDL= 1.8V) to drive a high-voltage domain (VDDH = 3.3) without causing excessive leakage or reliability issues. This is achieved by using a cross-coupled pull-up network that "latches" the high-voltage state based on the input differential pair.
 ### 3.2 Schematic and Symbol Design
-Using the above theory, I have used the standard 1.8V models of pMOS and nMOS from Skywater 130nm PDK to design a CMOS inverter. The schematic and symbol of the inverter designed using Xschem is given below:
-![CMOS inverter schematic](.\Images\LVS_CMOS.png)<br><br>
-Although a CMOS inverter is conceptually simple, its design involves several important trade-offs between speed, power, noise margin, and area. In a CMOS inverter, optimizing one performance metric usually degrades another, so it requires careful balancing based on the target application and technology constraints. In this project I have tried to achieve ideal Vm = Vdd/2. This is important for having symmetric Noise Margins and Delays.<br>
-Theoretically to achieve this, I should take Wp = 2*Wn but models used from Skywater 130nm PDK, it is achieved when I take Wp = 3.5*Wn.
+The Level Shifter was designed in Xschem using the Skywater 130nm PDK. The circuit utilizes low-voltage transistors for the input stage and high-voltage 5V tolerant transistors (e.g., nfet_g5v0d10v5) for the output stage to handle the $3.3V$ rail safely.
+Input Rail (VDDL): 1.8V
+Output Rail (VDDH):3.3V
+Transistor Count: 8 instances (3 NFET 01v8, 1 PFET 01v8, 1 NFET 5V, 3 PFET 5V).
 ### 3.3.1 Noise Margin Analysis
 Noise margin is a measure of the inverter’s ability to tolerate noise without causing a logic error. It is derived directly from the Voltage Transfer Characteristics (VTC). The Voltage Transfer Characteristic (VTC) of a CMOS inverter represents the relationship between the output voltage (Vout) and the input voltage(Vin). It is obtained by performing a DC sweep of the input voltage while keeping the supply voltage constant. The VTC curve shows three operating regions: low-input/high-output, transition region, and high-input/low-output. The slope of the curve in the transition region indicates the inverter gain, and the switching threshold voltage Vm is defined as the point where Vin = Vout.<br>
 ![VTC](./Images/vtc_char_cmos.jpg)
