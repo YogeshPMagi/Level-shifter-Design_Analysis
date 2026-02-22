@@ -165,8 +165,11 @@ To account for physical parasitics, a Post-Layout Simulation was performed on th
 Voltage Translation: The circuit successfully translated a 1.8V input to a full rail-to-rail 3.3V
 output.
 Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
+
 ###4.2 Power and Delay AnalysisDynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
+
 Propagation Delay: The layout transitions are sharp, confirming that the transistor sizing is sufficient to overcome the contention in the cross-coupled PMOS network even with added layout parasitics.
 
-## 5.Summary 
-5.1 Project SummaryIn this project, a high-performance Level Shifter was designed, laid out, and verified using the SkyWater 130nm Open Source PDK. The design successfully bridges the gap between a low-voltage logic domain (1.8V) and a high-voltage I/O domain (3.3V). By utilizing a cross-coupled PMOS load architecture, the circuit provides a full rail-to-rail swing with minimal static power consumption.
+### 5.Summary 
+##5.1 Project Summary
+In this project, a high-performance Level Shifter was designed, laid out, and verified using the SkyWater 130nm Open Source PDK. The design successfully bridges the gap between a low-voltage logic domain (1.2V) and a high-voltage I/O domain (3.3V). By utilizing a cross-coupled PMOS load architecture, the circuit provides a full rail-to-rail swing with minimal static power consumption.
