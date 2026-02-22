@@ -1,0 +1,63 @@
+timestamp 1771746969
+version 8.3
+tech sky130A
+style ngspice()
+scale 1000 1 1e+06
+resistclasses 4400000 2200000 950000 3050000 120000 197000 114000 191000 120000 197000 114000 191000 48200 319800 2000000 48200 48200 12800 125 125 47 47 29 5
+parameters sky130_fd_pr__nfet_01v8 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters sky130_fd_pr__pfet_01v8 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters sky130_fd_pr__nfet_g5v0d10v5 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters sky130_fd_pr__nfet_20v0 l=l w=w a1=as a2=ad p1=ps p2=pd
+parameters sky130_fd_pr__nfet_g5v0d16v0 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters sky130_fd_pr__pfet_g5v0d10v5 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters sky130_fd_pr__pfet_20v0 l=l w=w a1=as a2=ad p1=ps p2=pd
+parameters sky130_fd_pr__pfet_g5v0d16v0 l=l w=w a1=as p1=ps a2=ad p2=pd
+port "VIN" 1 -259 -889 -256 -868 m2
+port "VOUT" 3 609 -796 609 -796 m2
+port "VOUT" 3 570 -803 594 -797 m2
+port "VDDL" 5 -205 -1058 -202 -1054 m1
+port "VDDH" 2 537 -140 537 -140 m1
+port "GND" 4 338 -1153 338 -1153 m1
+port "GND" 4 -37 -1468 -37 -1468 m1
+port "GND" 4 -214 -1344 -214 -1344 m1
+node "K" 0 0 60 -1399 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "A" 2083 614.919 -150 -1287 ndif 0 0 0 0 0 0 0 0 2460 202 2460 202 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7470 988 0 0 7617 624 2043 256 9363 1202 0 0 0 0 0 0 0 0
+node "VIN" 2341 934.665 -259 -889 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 13221 1608 0 0 2043 256 2043 256 12918 1676 0 0 0 0 0 0 0 0
+node "VOUT" 2152 888.724 570 -803 m2 0 0 0 0 0 0 0 0 0 0 0 0 12000 520 30000 1120 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 42000 1640 25200 1340 17280 592 0 0 0 0 0 0 0 0
+equiv "VOUT" "F"
+node "H" 4797 2532.91 -40 -620 mvpdif 0 0 0 0 0 0 0 0 12000 860 0 0 0 0 20000 900 0 0 0 0 0 0 0 0 0 0 0 0 0 0 95540 3298 0 0 42400 2348 48656 2642 39200 1140 0 0 0 0 0 0 0 0
+node "G" 3803 1541.5 10 -747 p 0 0 0 0 0 0 0 0 12000 860 0 0 0 0 20000 900 0 0 0 0 0 0 0 0 0 0 0 0 0 0 44640 1276 0 0 38800 2090 43780 2394 22160 714 0 0 0 0 0 0 0 0
+equiv "G" "M"
+equiv "G" "I"
+node "VDDL" 1813 439.002 -205 -1058 m1 0 0 0 0 22120 596 0 0 3605 276 2340 198 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6593 480 4550 330 0 0 0 0 0 0 0 0 0 0
+node "VDDH" 6679 4897.49 537 -140 m1 0 0 0 0 386406 2608 0 0 0 0 0 0 21789 1180 62000 2080 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 83389 3262 74133 2800 0 0 0 0 0 0 0 0 0 0
+equiv "VDDH" "C"
+equiv "VDDH" "B"
+equiv "VDDH" "O"
+substrate "GND" 0 0 -214 -1344 m1 0 0 0 0 0 0 0 0 26340 1118 3605 276 12000 520 19736 1156 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 63065 3070 51910 2600 0 0 0 0 0 0 0 0 0 0
+cap "H" "VOUT" 449.711
+cap "G" "H" 1384.78
+cap "VDDH" "VOUT" 420.93
+cap "VDDL" "VIN" 158.611
+cap "VOUT" "VIN" 0.655812
+cap "G" "VDDH" 1036.48
+cap "H" "A" 198.33
+cap "G" "VIN" 30.0114
+cap "VDDH" "A" 0.103276
+cap "VIN" "A" 355.879
+cap "H" "VDDH" 987.233
+cap "H" "VIN" 209.067
+cap "G" "VOUT" 69.6861
+cap "VDDH" "VIN" 6.80226
+cap "VDDL" "A" 132.368
+cap "VOUT" "A" 1.10286
+cap "VDDL" "H" 28.2224
+cap "G" "A" 87.877
+device msubckt sky130_fd_pr__nfet_g5v0d10v5 400 -1060 401 -1059 l=50 w=200 "GND" "H" 100 0 "GND" 200 12000,520 "VOUT" 200 12000,520
+device msubckt sky130_fd_pr__nfet_01v8 165 -1399 166 -1398 l=15 w=400 "GND" "A" 30 0 "GND" 400 12000,460 "G" 400 12000,860
+device msubckt sky130_fd_pr__nfet_01v8 90 -1399 91 -1398 l=15 w=400 "GND" "VIN" 30 0 "H" 400 12000,860 "GND" 400 12000,460
+device msubckt sky130_fd_pr__nfet_01v8 -170 -1287 -169 -1286 l=20 w=60 "GND" "VIN" 40 0 "GND" 60 2340,198 "A" 60 2460,202
+device msubckt sky130_fd_pr__pfet_01v8 -170 -1160 -169 -1159 l=20 w=60 "VDDL" "VIN" 40 0 "VDDL" 60 2340,198 "A" 60 2460,202
+device msubckt sky130_fd_pr__pfet_g5v0d10v5 400 -720 401 -719 l=50 w=500 "VDDH" "H" 100 0 "VDDH" 500 30000,1120 "VOUT" 500 30000,1120
+device msubckt sky130_fd_pr__pfet_g5v0d10v5 170 -620 171 -619 l=80 w=400 "VDDH" "H" 160 0 "VDDH" 400 16000,480 "G" 400 20000,900
+device msubckt sky130_fd_pr__pfet_g5v0d10v5 10 -620 11 -619 l=80 w=400 "VDDH" "G" 160 0 "H" 400 20000,900 "VDDH" 400 16000,480
