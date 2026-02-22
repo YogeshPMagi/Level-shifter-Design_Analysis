@@ -65,9 +65,12 @@ MOSFET models describe the electrical behavior of transistors under various bias
 The components used are as follows:
 
 1. ```nfet_01v8.sym``` (xschem_sky130 library)
-2. ```vsource.sym``` (xschem device library)
-3. ```code_shown.sym``` (xschem device library)
-4. ```gnd.sym``` (xschem device library)
+2. ```pfet_01v8.sym``` (xschem_sky130 library)
+3. ```vsource.sym``` (xschem device library)
+4. ```code_shown.sym``` (xschem device library)
+5. ```gnd.sym``` (xschem device library)
+6. ```pfet_g5v0d10v5.sym``` (xschem device library)
+7. ```nfet_g5v0d10v5.sym``` (xschem device library)
 
 I generated the netlist using Xschem and then do DC analysis usng Ngspice to plot basic characteristic plots for nMOS and pMOS transistors, i.e. **Ids vs Vds** and **Ids vs Vgs**.
 ![nMOS schematic](.\Images\nfet_01v8..png)<br>
@@ -101,11 +104,10 @@ In the above, when a square wave is applied to the NMOS inverter, a LOW input tu
 ![pMOS inverter Transient](.\Images\Pmos inv wave.png)<br>
 The pMOS here passes a strong 1 but only a weak 0 because of the same reason which is explained for the nMOS. When input is LOW, the pMOS turns ON and operates in linear region acting as a voltage controlled resistor. 
 
-## 3. CMOS Inverter Design and Analysis
-### 3.1 Why CMOS Circuits
-From the above section, it is observed that pMOS passes strong 1 and nMOS passes weak 0. Neither nMOS nor pMOS alone can be used to design an inverter to produce HIGH and LOW values. But we can use both together to achieve this since they complement each other. The pMOS is used as a pull-up network since it passes strong 1 and the nMOS is used as a pull-down network since it passes strong 0.<br>
-So, the circuit of CMOS consists of pMOS transistor between Vdd and Vout and nMOS circuit between Vout and GND (series with pMOS). When we give input logic 0, pMOS is ON and nMOS is OFF which makes current flow from VDD to Vout resulting in output logic 1. Similarly, when we give input logic 1, nMOS is turned ON and pMOS is turned OFF which makes the current flow from Vout node to GND resulting in output logic 0. In this way, CMOS can provide **rail-to-rail** output.
-### 3.2 Design of CMOS inverter circuit
+## 3. Level Shifter Design and Analysis
+### 3.1 Why Level Shifter  Circuits
+A Level Shifter is a crucial bridge in multi-voltage domain designs. It allows a signal from a low-voltage domain (VDDL= 1.8V) to drive a high-voltage domain (VDDH = 3.3) without causing excessive leakage or reliability issues. This is achieved by using a cross-coupled pull-up network that "latches" the high-voltage state based on the input differential pair.
+### 3.2 Schematic and Symbol Design
 Using the above theory, I have used the standard 1.8V models of pMOS and nMOS from Skywater 130nm PDK to design a CMOS inverter. The schematic and symbol of the inverter designed using Xschem is given below:
 ![CMOS inverter schematic](.\Images\LVS_CMOS.png)<br><br>
 Although a CMOS inverter is conceptually simple, its design involves several important trade-offs between speed, power, noise margin, and area. In a CMOS inverter, optimizing one performance metric usually degrades another, so it requires careful balancing based on the target application and technology constraints. In this project I have tried to achieve ideal Vm = Vdd/2. This is important for having symmetric Noise Margins and Delays.<br>
@@ -176,6 +178,17 @@ Below is the layout of the CMOS inverter I have designed and it is completed wit
 I have extracted the parasitics from the circuit and those parasitics are written in the spice netlist of the above layout deisgn.
 
 ### 3.5 Layout vs Schematic
-Layout Versus Schematic (LVS) is a verification step used in VLSI design to ensure that the physical layout represents the same circuit as the schematic. I have used **Netgen** for LVS and it needs spice netlists of both layout and schematic. I have extracted the inv_layout.ext file from Magic and converted it inv_layout.spice. Below is the Result of LVS in Netgen:<br>
-![lvs](.\Images\FNL_LVS_res.png)<br>
-The LVS result indicates that both the schematic and layout contain one NMOS and one PMOS transistor and four nets, corresponding to VDD, VSS, Vin, and Vout. Netgen reported that the two circuits match uniquely, confirming correct device count and connectivity between the schematic and the layout. Although some device geometry parameters (such as diffusion area, perimeter, and multiplicity) were not reported in the LVS output, the successful match confirms the logical equivalence of the design.
+The layout was verified against the schematic netlist using Netgen.
+Results: The LVS tool confirmed that both the Layout (CLS) and the Schematic (LVLSLVS) contain 8 devices and 8 nets.
+Final Status: "Circuits match uniquely." This confirms that the physical wiring and device properties (Width and Length) perfectly reflect the intended electrical design.
+## 4. Post-Layout Simulation Results
+To account for physical parasitics, a Post-Layout Simulation was performed on the netlist extracted from Magic (including parasitic capacitances).
+###4.1 Transient AnalysisThe simulation was run in Ngspice with a 1.8V pulse input and $3.3V$ high-voltage supply.
+Voltage Translation: The circuit successfully translated a 1.8V input to a full rail-to-rail 3.3V
+output.
+Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
+###4.2 Power and Delay AnalysisDynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
+Propagation Delay: The layout transitions are sharp, confirming that the transistor sizing is sufficient to overcome the contention in the cross-coupled PMOS network even with added layout parasitics.
+
+## 5.Summary 
+5.1 Project SummaryIn this project, a high-performance Level Shifter was designed, laid out, and verified using the SkyWater 130nm Open Source PDK. The design successfully bridges the gap between a low-voltage logic domain (1.8V) and a high-voltage I/O domain (3.3V). By utilizing a cross-coupled PMOS load architecture, the circuit provides a full rail-to-rail swing with minimal static power consumption.
