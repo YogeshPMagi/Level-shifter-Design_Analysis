@@ -84,16 +84,20 @@ The pMOS here passes a strong 1 but only a weak 0 because of the same reason whi
 
 ## 3. Level Shifter Design and Analysis
 ### 3.1 Why Level Shifter  Circuits
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Schematic.png)<br>
 A Level Shifter is a crucial bridge in multi-voltage domain designs. It allows a signal from a low-voltage domain (VDDL= 1.8V) to drive a high-voltage domain (VDDH = 3.3) without causing excessive leakage or reliability issues. This is achieved by using a cross-coupled pull-up network that "latches" the high-voltage state based on the input differential pair.
 ### 3.2 Schematic and Symbol Design
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Xscheme_schematic.png)
 The Level Shifter was designed in Xschem using the Skywater 130nm PDK. The circuit utilizes low-voltage transistors for the input stage and high-voltage 5V tolerant transistors (e.g., nfet_g5v0d10v5) for the output stage to handle the $3.3V$ rail safely.
-Input Rail (VDDL): 1.8V
+Input Rail (VDDL): 1.2V
 Output Rail (VDDH):3.3V
 Transistor Count: 8 instances (3 NFET 01v8, 1 PFET 01v8, 1 NFET 5V, 3 PFET 5V).
 
 ### 3.3 Delay Analysis
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Rise%20time%20and%20prp%20delay.png)
 Propagation delay is defined as the time interval between the 50% transition points of the input and output waveforms. In this Level Shifter design, the delay is influenced by the "contention" between the pull-down NMOS network and the cross-coupled PMOS load.
 
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Screenshot%202026-02-22%20193318.png)
 The following measurements were obtained from the transient analysis:
 Rise Time (tr): 56.28 ps
 Fall Time (tf): 57.11 ps
@@ -106,20 +110,32 @@ t_p = (tpLH+tpHL)/2
 The significant difference between tpLH and tpHL is characteristic of DCVSL level shifters, where one side must "overpower" the other to flip the state of the latch.
 
 3.4 Switching Characteristics
+
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/VIN_Vout.png)
 The transient plots show successful level translation from the 1.2V domain to the 3.3V domain.
 Voltage Levels: The input signal oscillates between 0V and 1.2V, while the output successfully swings from 0V to a full 3.3V.
 Capacitive Coupling: A small "undershoot" or dip below 0V is visible on the output waveform during the rising edge of the input. This is due to parasitic capacitive coupling (feedthrough) within the circuit before the pull-up network fully engages.
 
 
+### 5.Layout
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Lay_out_lvl.png)
+The Level Shifter layout in SkyWater 130nm successfully integrates a dual-voltage architecture, bridging the 1.2v and 3.3v domains. By utilizing a combination of standard thin-oxide and 5v thick-oxide transistors, the design ensures reliable operation under high-voltage conditions. Precise N-well isolation and strategic substrate biasing were implemented to maintain signal integrity and prevent latch-up across the different supply potentials, ultimately achieving a clean status of 0 DRC errors.
+
+The physical implementation effectively manages the cross-coupled routing required for the DCVSL architecture. Through the efficient use of Metal1 and Polysilicon layers, the complex feedback loops were successfully resolved within a compact footprint. While physical extraction introduced expected parasitics, the design remained robust, delivering a clean rail-to-rail 3.3v output with a final average propagation delay of 826.56 ps.
+
+Verification through Netgen LVS confirmed a unique match, proving the physical routing perfectly translates the 8-transistor schematic into a manufacturable layout. This successful match demonstrates that the NMOS pull-down network is well-optimized to drive the high-voltage PMOS latch effectively.
+
 ### 4. Layout vs Schematic
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/LVS_Res.png)
 The layout was verified against the schematic netlist using Netgen.
 Results: The LVS tool confirmed that both the Layout (CLS) and the Schematic (LVLSLVS) contain 8 devices and 8 nets.
 Final Status: "Circuits match uniquely." This confirms that the physical wiring and device properties (Width and Length) perfectly reflect the intended electrical design.
 ## 5. Post-Layout Simulation Results
 To account for physical parasitics, a Post-Layout Simulation was performed on the netlist extracted from Magic (including parasitic capacitances).
-###4.1 Transient AnalysisThe simulation was run in Ngspice with a 1.8V pulse input and $3.3V$ high-voltage supply.
-Voltage Translation: The circuit successfully translated a 1.8V input to a full rail-to-rail 3.3V
-output.
+###4.1 Transient AnalysisThe simulation was run in Ngspice with a 1.2V pulse input and 3.3V high-voltage supply.
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/POST_Lay_simu.png)
+Voltage Translation: The circuit successfully translated a 1.2V input to a full rail-to-rail 3.3V output.
+
 Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
 
 ###6 Power Analysis
