@@ -135,12 +135,13 @@ Final Status: "Circuits match uniquely." This confirms that the physical wiring 
 ### 3.7 Post-Layout Simulation Results
 To account for physical parasitics, a Post-Layout Simulation was performed on the netlist extracted from Magic (including parasitic capacitances).
 Transient AnalysisThe simulation was run in Ngspice with a 1.2V pulse input and 3.3V high-voltage supply.
-![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/POST_Lay_simu.png)
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/post_lay_grp.png)
 Voltage Translation: The circuit successfully translated a 1.2V input to a full rail-to-rail 3.3V output.
 
 Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
 
 ### 3.8 Power Analysis
+![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Power_cons.png)
 Dynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
 Static Power: Between switching events, the power consumption drops to near zero, indicating that the cross-coupled architecture effectively eliminates static current paths once the output state is latched.
 
