@@ -74,12 +74,12 @@ The components used are as follows:
 
 
 ### 2.2 Strong 0 and Weak 1
-(![NMOS Inverter](https://raw.githubusercontent.com/YogeshPMagi/Level-shifter-Design_Analysis/main/Images/NMOS_INV%20(2).png))<br>
-![nMOS inverter Transient](.\Images\Nmos inv Wave.png)<br>
+![NMOS Inverter](https://raw.githubusercontent.com/YogeshPMagi/Level-shifter-Design_Analysis/main/Images/NMOS_INV%20(2).png)<br>
+![NMOS inverter Transient](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Nmos%20inv%20Wave.png)<br>
 In the above, when a square wave is applied to the NMOS inverter, a LOW input turns the NMOS OFF and the output is pulled up to 1.8 V. When the input is HIGH, the NMOS turns ON and operates in the linear region as a result it will act as a voltage controlled resistor. The output then forms a voltage divider and does not reach the full logic level. Hence, NMOS passes a strong 0 but only a weak 1.
 ### 2.3 Weak 0 and Strong 1
-![pMOS inverter](.\Images\Pmos_inv (2).png)<br><br>
-![pMOS inverter Transient](.\Images\Pmos inv wave.png)<br>
+![pMOS inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Pmos_inv%20(2).png)<br>
+![pMOS inverter Transient](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Pmos%20inv%20wave.png)<br>
 The pMOS here passes a strong 1 but only a weak 0 because of the same reason which is explained for the nMOS. When input is LOW, the pMOS turns ON and operates in linear region acting as a voltage controlled resistor. 
 
 ## 3. Level Shifter Design and Analysis
