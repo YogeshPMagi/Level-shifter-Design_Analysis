@@ -89,6 +89,7 @@ The pMOS here passes a strong 1 but only a weak 0 because of the same reason whi
 A Level Shifter is a crucial bridge in multi-voltage domain designs. It allows a signal from a low-voltage domain (VDDL= 1.8V) to drive a high-voltage domain (VDDH = 3.3) without causing excessive leakage or reliability issues. This is achieved by using a cross-coupled pull-up network that "latches" the high-voltage state based on the input differential pair.
 ### 3.2 Schematic and Symbol Design
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Xscheme_schematic.png)
+
 The Level Shifter was designed in Xschem using the Skywater 130nm PDK. The circuit utilizes low-voltage transistors for the input stage and high-voltage 5V tolerant transistors (e.g., nfet_g5v0d10v5) for the output stage to handle the $3.3V$ rail safely.
 Input Rail (VDDL): 1.2V
 Output Rail (VDDH):3.3V
@@ -99,6 +100,7 @@ Transistor Count: 8 instances (3 NFET 01v8, 1 PFET 01v8, 1 NFET 5V, 3 PFET 5V).
 Propagation delay is defined as the time interval between the 50% transition points of the input and output waveforms. In this Level Shifter design, the delay is influenced by the "contention" between the pull-down NMOS network and the cross-coupled PMOS load.
 
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Screenshot%202026-02-22%20193318.png)
+
 The following measurements were obtained from the transient analysis:
 Rise Time (tr): 56.28 ps
 Fall Time (tf): 57.11 ps
@@ -124,11 +126,10 @@ The Level Shifter layout in SkyWater 130nm successfully integrates a dual-voltag
 
 The physical implementation effectively manages the cross-coupled routing required for the DCVSL architecture. Through the efficient use of Metal1 and Polysilicon layers, the complex feedback loops were successfully resolved within a compact footprint. While physical extraction introduced expected parasitics, the design remained robust, delivering a clean rail-to-rail 3.3v output with a final average propagation delay of 826.56 ps.
 
-Verification through Netgen LVS confirmed a unique match, proving the physical routing perfectly translates the 8-transistor schematic into a manufacturable layout. This successful match demonstrates that the NMOS pull-down network is well-optimized to drive the high-voltage PMOS latch effectively.
-
 ### 3.6 Layout vs Schematic
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/LVS_Res.png)
 The layout was verified against the schematic netlist using Netgen.
+
 Results: The LVS tool confirmed that both the Layout (CLS) and the Schematic (LVLSLVS) contain 8 devices and 8 nets.
 Final Status: "Circuits match uniquely." This confirms that the physical wiring and device properties (Width and Length) perfectly reflect the intended electrical design.
 ### 3.7 Post-Layout Simulation Results
