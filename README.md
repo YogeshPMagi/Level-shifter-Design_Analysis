@@ -74,7 +74,7 @@ The components used are as follows:
 
 
 ### 2.2 Strong 0 and Weak 1
-![nMOS inverter](![NMOS Inverter](https://raw.githubusercontent.com/YogeshPMagi/Level-shifter-Design_Analysis/main/Images/NMOS_INV%20(2).png))<br>
+(![NMOS Inverter](https://raw.githubusercontent.com/YogeshPMagi/Level-shifter-Design_Analysis/main/Images/NMOS_INV%20(2).png))<br>
 ![nMOS inverter Transient](.\Images\Nmos inv Wave.png)<br>
 In the above, when a square wave is applied to the NMOS inverter, a LOW input turns the NMOS OFF and the output is pulled up to 1.8 V. When the input is HIGH, the NMOS turns ON and operates in the linear region as a result it will act as a voltage controlled resistor. The output then forms a voltage divider and does not reach the full logic level. Hence, NMOS passes a strong 0 but only a weak 1.
 ### 2.3 Weak 0 and Strong 1
