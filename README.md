@@ -91,7 +91,7 @@ Input Rail (VDDL): 1.8V
 Output Rail (VDDH):3.3V
 Transistor Count: 8 instances (3 NFET 01v8, 1 PFET 01v8, 1 NFET 5V, 3 PFET 5V).
 
-### 3.3.2 Delay Analysis
+### 3.3 Delay Analysis
 Propagation delay is defined as the time interval between the 50% transition points of the input and output waveforms. In this Level Shifter design, the delay is influenced by the "contention" between the pull-down NMOS network and the cross-coupled PMOS load.
 
 The following measurements were obtained from the transient analysis:
@@ -105,24 +105,24 @@ t_p = (tpLH+tpHL)/2
 
 The significant difference between tpLH and tpHL is characteristic of DCVSL level shifters, where one side must "overpower" the other to flip the state of the latch.
 
-3.2.2 Switching Characteristics
+3.4 Switching Characteristics
 The transient plots show successful level translation from the 1.2V domain to the 3.3V domain.
 Voltage Levels: The input signal oscillates between 0V and 1.2V, while the output successfully swings from 0V to a full 3.3V.
 Capacitive Coupling: A small "undershoot" or dip below 0V is visible on the output waveform during the rising edge of the input. This is due to parasitic capacitive coupling (feedthrough) within the circuit before the pull-up network fully engages.
 
 
-### 3.5 Layout vs Schematic
+### 4. Layout vs Schematic
 The layout was verified against the schematic netlist using Netgen.
 Results: The LVS tool confirmed that both the Layout (CLS) and the Schematic (LVLSLVS) contain 8 devices and 8 nets.
 Final Status: "Circuits match uniquely." This confirms that the physical wiring and device properties (Width and Length) perfectly reflect the intended electrical design.
-## 4. Post-Layout Simulation Results
+## 5. Post-Layout Simulation Results
 To account for physical parasitics, a Post-Layout Simulation was performed on the netlist extracted from Magic (including parasitic capacitances).
 ###4.1 Transient AnalysisThe simulation was run in Ngspice with a 1.8V pulse input and $3.3V$ high-voltage supply.
 Voltage Translation: The circuit successfully translated a 1.8V input to a full rail-to-rail 3.3V
 output.
 Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
 
-###4.2 Power and Delay Analysis
+###6 Power Analysis
 Dynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
 Static Power: Between switching events, the power consumption drops to near zero, indicating that the cross-coupled architecture effectively eliminates static current paths once the output state is latched.
 
