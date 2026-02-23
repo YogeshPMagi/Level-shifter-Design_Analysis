@@ -90,70 +90,26 @@ The Level Shifter was designed in Xschem using the Skywater 130nm PDK. The circu
 Input Rail (VDDL): 1.8V
 Output Rail (VDDH):3.3V
 Transistor Count: 8 instances (3 NFET 01v8, 1 PFET 01v8, 1 NFET 5V, 3 PFET 5V).
-### 3.3.1 Noise Margin Analysis
-Noise margin is a measure of the inverter’s ability to tolerate noise without causing a logic error. It is derived directly from the Voltage Transfer Characteristics (VTC). The Voltage Transfer Characteristic (VTC) of a CMOS inverter represents the relationship between the output voltage (Vout) and the input voltage(Vin). It is obtained by performing a DC sweep of the input voltage while keeping the supply voltage constant. The VTC curve shows three operating regions: low-input/high-output, transition region, and high-input/low-output. The slope of the curve in the transition region indicates the inverter gain, and the switching threshold voltage Vm is defined as the point where Vin = Vout.<br>
-![VTC](./Images/vtc_char_cmos.jpg)
-![noise margin](./Images/noise_margin.png)<br>
-I have created a testbench for my designed inverter feeding it Vdd = 1.8V and a input pulse which oscillates between 0 to 1.8V and has a period of 6.6ns:
-After running simulation for DC analysis we get the results below:
-![CMOS inverter VTC](.\Images\CMOS_nseDC.png)<br>
-From the above Voltage Transfer Characteristic curve of CMOS inverter, it can be seen that the Vm is very close to 0.9V i.e. half of 1.8V. Also, from the VTC, the following critical points can be found:<br><br>
-    **VOH** - Maximum output voltage when it is logic '1'.<br>
-    **VOL** - Minimun output voltage when it is logic '0'.<br>
-    **VIH** - Maximum input voltage that can be interpreted as logic '0'.<br>
-    **VIL** - Minimum input voltage that can be interpreted as logic '1'.<br>
-    **Vm** - Switching Threshold voltage<br><br>
-The Points VIL, VIH, VOL and VOH lies on the curve where the magnitude of the slope is 1 and Vth lies where Vin = Vout. So, I have used the ```meas``` command tofrom  find these points the plot:
-The values of the points obtained from the above plot:
-| Voltage | Value |
-|---------|-------|
-| Vm | 0.899V |
-|   VOH   | 1.746V  |
-|   VOL   |  0.0701V   |
-|   VIH   | 1.026V |
-|   VIL   | 0.775V |
-
-There are two such values of Noise margins for a binary system. The calculation of Noise margin are done using the two expressions:<br>
-NOISE MARGIN LOW: **NML = VIL - VOL**<br>
-NOISE MARGIN HIGH: **NMH = VOH - VIH**<br>
-
-The Noise margin values obtained for our inverter are **NML = 0.705V** and **NMH = 0.72V**.
-Since we have obtained the Vm very close to 0.9, so the noise margins obatined are very close to each other.
 
 ### 3.3.2 Delay Analysis
-For the delay analysis, transient analysis is used since it is a time-domain phenomenon. I have used the same testbench that I used before for my inverter for Noise Margin analysis. The obtained transient analysis plot for Vin and Vout is shown below:
-![CMOS inverter tran](.\Images\CMOS_DLY anlys.png)<br>
-From the above plot, I have calculated the propagation delay first. **Propagation delay** is defined as the time it takes for a change at the input of a gate to cause a corresponding change at the output. It is measured between the 50% points of the input and output voltage waveforms. In a CMOS inverter:<br>
-tpHL: Time delay when output falls from HIGH to LOW.<br>
-tpLH: Time delay when output rises from LOW to HIGH.<br>
-The average propagation delay is given by:<br>
-tp = (tpHL+tpLH)/2
-![propagation delay](./Images/prop_delay.jpg)<br>
-So I have obtained **tpLH = 42.308ps** and **tpLH = 47.394ps**, then calculated **tp = 44.851ps**. <br>​
-Propagation delay in depends on the input, specifically the input transition time (**input slew rate**), as faster inputs generally lead to lesser delays. Propagation delay alone is sufficient only for an isolated gate with fixed input slew. In real digital systems, gates are cascaded, and since delay depends on input slew, rise and fall times must be known to correctly predict timing, power, and reliability of the entire path.
-The above rise and fall time analysis is for Wp = 3.5 and Wn = 1. Also it is defined for the transition when output goes from 90% to 10% for fall time, and from 10% to 90% transition for rise time. The results are **trise = 123.587ps** and **tfall = 89.804ps**.<br>
+Propagation delay is defined as the time interval between the 50% transition points of the input and output waveforms. In this Level Shifter design, the delay is influenced by the "contention" between the pull-down NMOS network and the cross-coupled PMOS load.
 
-The rise time and fall time should be minimized in a CMOS inverter To reduce delay in cascaded logic (input-slew dependence). I tried to reduce it by following ways:
-1. **Increase supply power Vdd**: A higher Vdd could drive more current leading to faster transitions but it would increase dynamic power and short circuit in our circuit. So, I found that it is not preferred.
-2. **Increase width of transistors**: Increasing transistor widths could increase their drive strengths decreasing rise and fall time because it would reduce Ron. However, tradeoff here is area. So I made Wp = 4 and Wn = 2 and run the simulations:
-![rise and fall time](.\Images\INV_p=4_n=2.png)<br>
-Here, I get unexpected results as trise decreased and tfall increased. This can be explained because in unloaded analysis, the internal capacitance also scales with the transistor width along with the increasing driving strengths. So I tried to perform loaded analysis by taking a load capacitance of 0.1pF:
-![rise and fall time](.\Images\INV_p=3.5_n=1.png)<br>
-In the above unloaded analysis where I have taken Wp = 3.5 and Wn = 1, we get **trise = 341.163ps** and t**fall = 371.712ps**<br><br>
-In another unloaded analysis where I have taken Wp = 4 and Wn = 2, we get **trise = 301.795ps** and **tfall = 226.137ps**<br><br>
-It is observed that clearly both decreases here. trise decreased by a lesser amount compared to tfall because Wp if increased by 0.5 only and Wn is increased to twice. In loaded analysis, the presence of a large external load capacitance makes drive strength the dominant factor, resulting in predictable reductions in rise and fall times with increased transistor widths.<br><br>
+The following measurements were obtained from the transient analysis:
+Rise Time (tr): 56.28 ps
+Fall Time (tf): 57.11 ps
+Propagation Delay Low-to-High (tpLH): 194.66 ps
+Propagation Delay High-to-Low (tpHL): 926.68 ps
+The average propagation delay (t_p) is calculated as:
+t_p = (tpLH+tpHL)/2
+    = 560.67ps
 
-### 3.3.3 Power Dissipation Analysis
-For Power dissipation I have done transient analysis of my loaded inverter testbench with Wp = 3.5 and Wn = 1. I have used the ```integ``` to perform integration of the current from Vdd source in the formula Pavg ​= (1/T) ∫[0→T] V_DD · I_DD(t) dt. For the time period in integration I have taken the second period from 6.6ns to 13.2ns since first period may conatain some anomaly.
-![power](.\Images\Pinst.png)<br>
-Since the current is very small I have scale it up by 1000, so that it can be seen properly on the plot. The result obtained after power analysis is **Power_avg = 50.654 μW**. This includes dynamic power and short-circuit power.
+The significant difference between tpLH and tpHL is characteristic of DCVSL level shifters, where one side must "overpower" the other to flip the state of the latch.
 
-### 3.4 Layout Design of CMOS inverter
-At this stage I have tried to design a DRC-clean CMOS inverter layout corresponding to the schematic design, ensuring correct transistor sizing and proper connectivity. **Design Rule Check (DRC)** is a verification step used in VLSI layout design to ensure that the physical layout follows all fabrication rules defined by the technology, here it is SkyWater 130nm. I have used **MAGIC VLSI** and TCL language for designing the a standard full-custom layout of CMOS inverter. I have kept the transistor sizes in layout same as I have taken in schematic. For designing the layout, I have referred the metal stack diagram and Design Rules from the [SkyWater SKY130 PDK](https://skywater-pdk.readthedocs.io/en/main/rules/assumptions.html) documentation itself. Below is the metal stack diagram:
-![metal stack diagram](./Images/metal_stack.png)<br>​
-Below is the layout of the CMOS inverter I have designed and it is completed with 0 DRC errors.:<br>
-<img src = "![alt text](<CMOS_INV LAY.png>)" width = "70%" height = "70%"></img><br>
-I have extracted the parasitics from the circuit and those parasitics are written in the spice netlist of the above layout deisgn.
+3.2.2 Switching Characteristics
+The transient plots show successful level translation from the 1.2V domain to the 3.3V domain.
+Voltage Levels: The input signal oscillates between 0V and 1.2V, while the output successfully swings from 0V to a full 3.3V.
+Capacitive Coupling: A small "undershoot" or dip below 0V is visible on the output waveform during the rising edge of the input. This is due to parasitic capacitive coupling (feedthrough) within the circuit before the pull-up network fully engages.
+
 
 ### 3.5 Layout vs Schematic
 The layout was verified against the schematic netlist using Netgen.
@@ -166,9 +122,13 @@ Voltage Translation: The circuit successfully translated a 1.8V input to a full 
 output.
 Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
 
-###4.2 Power and Delay AnalysisDynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
+###4.2 Power and Delay Analysis
+Dynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
+Static Power: Between switching events, the power consumption drops to near zero, indicating that the cross-coupled architecture effectively eliminates static current paths once the output state is latched.
 
-Propagation Delay: The layout transitions are sharp, confirming that the transistor sizing is sufficient to overcome the contention in the cross-coupled PMOS network even with added layout parasitics.
+Total Energy: The total energy consumed per switching cycle is measured at approximately -1.86e-12 Joules.
+
+This analysis confirms that while the Level Shifter introduces more delay than a standard inverter due to its contention-based switching, it provides a robust, rail-to-rail 3.3V output with efficient zero-static power consumption.
 
 ### 5.Summary 
 ##5.1 Project Summary
