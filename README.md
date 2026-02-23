@@ -130,6 +130,6 @@ Total Energy: The total energy consumed per switching cycle is measured at appro
 
 This analysis confirms that while the Level Shifter introduces more delay than a standard inverter due to its contention-based switching, it provides a robust, rail-to-rail 3.3V output with efficient zero-static power consumption.
 
-### 5.Summary 
-##5.1 Project Summary
+Summary 
+Project Summary
 In this project, a high-performance Level Shifter was designed, laid out, and verified using the SkyWater 130nm Open Source PDK. The design successfully bridges the gap between a low-voltage logic domain (1.2V) and a high-voltage I/O domain (3.3V). By utilizing a cross-coupled PMOS load architecture, the circuit provides a full rail-to-rail swing with minimal static power consumption.
