@@ -18,15 +18,15 @@
   - [2.1 General MOS analysis](#21-General-MOS-analysis)
   - [2.2 Strong 0 and Weak 1](#22-Strong-0-and-Weak-1)
   - [2.3 Weak 0 and Strong 1](#23-Weak-0-and-Strong-1)
-- [3. CMOS Inverter Design and Analysis](#3-CMOS-Inverter-Design-and-Analysis)
-  - [3.1 Why CMOS Circuits](#31-Why-CMOS-Circuits) 
-  - [3.2 Design of CMOS inverter circuit](#32-Design-of-CMOS-inverter-circuit)
-  - [3.3 Analysis of CMOS inverter](#33-Analysis-of-CMOS-inverter)
-    - [3.3.1 Noise Margin Analysis](#331-Noise-Margin-Analysis)
-    - [3.3.2 Delay Analysis](#332-Delay-Analysis)
-    - [3.3.3 Power Dissipation Analysis](#332-Power-Dissipation-Analysis)
-  - [3.4. Layout Design of CMOS inverter](#34-Layout-Design-of-CMOS-inverter)
+- [3. Level Shifter Design and Analysis](#3-Level-Shifter-Design-and-Analysis)
+  - [3.1 Why Level Shifter Circuits](#31-Why-Level-Shifter-Circuits) 
+  - [3.2 Schematic and Symbol Design](#32-Schematic-and-Symbol-Design)
+  - [3.3 Delay Analysis](#33-Delay-Analysis)
+  - [3.4 Switching Characteristics](#34-Switching_Characteristics)
   - [3.5 Layout vs Schematic](#35-Layout-vs-Schematic)
+  - [3.6 Post-Layout Simulation Results](#36-Post-Layout-Simulation)
+  - [3.7 Power Analysis Dynamic Power](#37-Power-Analysis-Dynamic-Power)
+  - [3.8 Project Summary](#38-Project-Summary)
 
 ## 1. Tools and PDK
 ### 1.1 Xschem
