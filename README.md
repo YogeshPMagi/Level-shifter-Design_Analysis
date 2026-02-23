@@ -23,10 +23,11 @@
   - [3.2 Schematic and Symbol Design](#32-Schematic-and-Symbol-Design)
   - [3.3 Delay Analysis](#33-Delay-Analysis)
   - [3.4 Switching Characteristics](#34-Switching_Characteristics)
-  - [3.5 Layout vs Schematic](#35-Layout-vs-Schematic)
-  - [3.6 Post-Layout Simulation Results](#36-Post-Layout-Simulation)
-  - [3.7 Power Analysis Dynamic Power](#37-Power-Analysis-Dynamic-Power)
-  - [3.8 Project Summary](#38-Project-Summary)
+  - [3.5 Layout ](#35-Layout)
+  - [3.6 Layout vs Schematic](#36-Layout-vs-Schematic)
+  - [3.7 Post-Layout Simulation Results](#37-Post-Layout-Simulation)
+  - [3.8 Power Analysis Dynamic Power](#38-Power-Analysis-Dynamic-Power)
+  - [3.9 Project Summary](#39-Project-Summary)
 
 ## 1. Tools and PDK
 ### 1.1 Xschem
@@ -125,20 +126,20 @@ The physical implementation effectively manages the cross-coupled routing requir
 
 Verification through Netgen LVS confirmed a unique match, proving the physical routing perfectly translates the 8-transistor schematic into a manufacturable layout. This successful match demonstrates that the NMOS pull-down network is well-optimized to drive the high-voltage PMOS latch effectively.
 
-### 4. Layout vs Schematic
+### 3.6 Layout vs Schematic
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/LVS_Res.png)
 The layout was verified against the schematic netlist using Netgen.
 Results: The LVS tool confirmed that both the Layout (CLS) and the Schematic (LVLSLVS) contain 8 devices and 8 nets.
 Final Status: "Circuits match uniquely." This confirms that the physical wiring and device properties (Width and Length) perfectly reflect the intended electrical design.
-## 5. Post-Layout Simulation Results
+### 3.7 Post-Layout Simulation Results
 To account for physical parasitics, a Post-Layout Simulation was performed on the netlist extracted from Magic (including parasitic capacitances).
-###4.1 Transient AnalysisThe simulation was run in Ngspice with a 1.2V pulse input and 3.3V high-voltage supply.
+Transient AnalysisThe simulation was run in Ngspice with a 1.2V pulse input and 3.3V high-voltage supply.
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/POST_Lay_simu.png)
 Voltage Translation: The circuit successfully translated a 1.2V input to a full rail-to-rail 3.3V output.
 
 Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
 
-###6 Power Analysis
+### 3.8 Power Analysis
 Dynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
 Static Power: Between switching events, the power consumption drops to near zero, indicating that the cross-coupled architecture effectively eliminates static current paths once the output state is latched.
 
@@ -146,6 +147,6 @@ Total Energy: The total energy consumed per switching cycle is measured at appro
 
 This analysis confirms that while the Level Shifter introduces more delay than a standard inverter due to its contention-based switching, it provides a robust, rail-to-rail 3.3V output with efficient zero-static power consumption.
 
-Summary 
+### 3.9 Summary 
 Project Summary
 In this project, a high-performance Level Shifter was designed, laid out, and verified using the SkyWater 130nm Open Source PDK. The design successfully bridges the gap between a low-voltage logic domain (1.2V) and a high-voltage I/O domain (3.3V). By utilizing a cross-coupled PMOS load architecture, the circuit provides a full rail-to-rail swing with minimal static power consumption.
