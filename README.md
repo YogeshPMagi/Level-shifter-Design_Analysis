@@ -109,7 +109,7 @@ t_p = (tpLH+tpHL)/2
 
 The significant difference between tpLH and tpHL is characteristic of DCVSL level shifters, where one side must "overpower" the other to flip the state of the latch.
 
-3.4 Switching Characteristics
+### 3.4 Switching Characteristics
 
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/VIN_Vout.png)
 The transient plots show successful level translation from the 1.2V domain to the 3.3V domain.
@@ -117,7 +117,7 @@ Voltage Levels: The input signal oscillates between 0V and 1.2V, while the outpu
 Capacitive Coupling: A small "undershoot" or dip below 0V is visible on the output waveform during the rising edge of the input. This is due to parasitic capacitive coupling (feedthrough) within the circuit before the pull-up network fully engages.
 
 
-### 5.Layout
+### 3.5 Layout
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Lay_out_lvl.png)
 The Level Shifter layout in SkyWater 130nm successfully integrates a dual-voltage architecture, bridging the 1.2v and 3.3v domains. By utilizing a combination of standard thin-oxide and 5v thick-oxide transistors, the design ensures reliable operation under high-voltage conditions. Precise N-well isolation and strategic substrate biasing were implemented to maintain signal integrity and prevent latch-up across the different supply potentials, ultimately achieving a clean status of 0 DRC errors.
 
