@@ -86,7 +86,7 @@ The pMOS here passes a strong 1 but only a weak 0 because of the same reason whi
 ## 3. Level Shifter Design and Analysis
 ### 3.1 Why Level Shifter  Circuits
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Schematic.png)<br>
-A Level Shifter is a crucial bridge in multi-voltage domain designs. It allows a signal from a low-voltage domain (VDDL= 1.8V) to drive a high-voltage domain (VDDH = 3.3) without causing excessive leakage or reliability issues. This is achieved by using a cross-coupled pull-up network that "latches" the high-voltage state based on the input differential pair.
+A Level Shifter is a crucial bridge in multi-voltage domain designs. It allows a signal from a low-voltage domain (VDDL= 1.2V) to drive a high-voltage domain (VDDH = 3.3) without causing excessive leakage or reliability issues. This is achieved by using a cross-coupled pull-up network that "latches" the high-voltage state based on the input differential pair.
 ### 3.2 Schematic and Symbol Design
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Xscheme_schematic.png)
 
