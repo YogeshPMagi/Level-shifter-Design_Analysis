@@ -140,6 +140,8 @@ Voltage Translation: The circuit successfully translated a 1.2V input to a full 
 
 Signal Integrity: As seen in the transient plots, the output (Vout) shows clean switching. A minor capacitive coupling "dip" is observed during the rising edge, which is a common characteristic of cross-coupled level shifters due to internal parasitic capacitance.
 
+### 3.8 Comparing Schematic to Layout
+Delay Comparison: The average propagation delay increased from 560.67 ps in the schematic to 826.56 ps in the layout, representing a 47.4% timing penalty due to metal resistance and junction capacitance.Power Comparison: Total average power consumption rose from approximately 96.30 µW to 141.59 µW, a 47.0% increase driven by the additional energy required to charge parasitic parasitic wire and overlap capacitances.Design Efficiency: The Power-Delay Product (PDP) shifted from the $10^{-14}$ J range to the $10^{-13}$ J range, proving that layout parasitics nearly decimate the energy efficiency of an "ideal" design.
 ### 3.8 Power Analysis
 ![NMOS Inverter](https://github.com/YogeshPMagi/Level-shifter-Design_Analysis/blob/main/Images/Power_cons.png)
 Dynamic Power: Instantaneous power (pinst) plots show sharp spikes during switching events, peaking at approximately 2.7mW. This indicates energy is primarily consumed during transitions (charging parasitics) with negligible static leakage.
