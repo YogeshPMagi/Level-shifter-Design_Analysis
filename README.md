@@ -150,6 +150,7 @@ Signal Integrity: As seen in the transient plots, the output (Vout) shows clean 
 Delay Comparison: The average propagation delay increased from 560.67 ps in the schematic to 826.56 ps in the layout, representing a 47.4% timing penalty due to metal resistance and junction capacitance.
 
 Power Comparison: Total average power consumption rose from approximately 96.30 µW to 141.59 µW, a 47.0% increase driven by the additional energy required to charge parasitic parasitic wire and overlap capacitances.
+
 Design Efficiency: The Power-Delay Product (PDP) shifted from the 10^-14 J range to the 10^-13J range, proving that layout parasitics nearly decimate the energy efficiency of an "ideal" design.
 
 ### 3.8 Power Analysis
